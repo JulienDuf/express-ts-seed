@@ -1,13 +1,10 @@
-'use strict';
-
 import * as express from 'express';
 import * as path from 'path';
 import * as logger from 'morgan';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import { Index } from './route/index';
-
-const cors = require("cors");
 
 export class Application {
 
@@ -26,10 +23,6 @@ export class Application {
     }
 
     private config() {
-
-        this.app.set("views", path.join(__dirname, "../views"));
-        this.app.set("view engine", "pug");
-
         this.app.use(logger('dev'));
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,8 +32,7 @@ export class Application {
     }
 
     public routes() {
-
-        let index: Index = new Index();
+        const index: Index = new Index();
         this.app.use("/", index.router);
 
         this.app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {

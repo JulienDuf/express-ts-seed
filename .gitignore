@@ -4,11 +4,6 @@ false/
 
 build/
 
-npm-debug.log
-
-*.js.map
-*.js
-
 .idea*
 
-!grunt.js
+.env
